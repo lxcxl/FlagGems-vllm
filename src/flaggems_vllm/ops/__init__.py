@@ -205,6 +205,10 @@ from flaggems_vllm.ops.kpool import (
     kpool_decode_update_and_maybe_write_cache_batched,
     kpool_seed_tail_cache,
 )
+from flaggems_vllm.ops.megapreattention import (
+    clear_megapreattention_cache,
+    megapreattention,
+)
 from flaggems_vllm.ops.mhc_with_norm import (
     mhc_fused_post_pre_with_norm,
     mhc_pre_with_norm,
@@ -218,6 +222,8 @@ from flaggems_vllm.ops.vit_attention import (
 )
 
 __all__ = [
+    "megapreattention",
+    "clear_megapreattention_cache",
     "act_quant_triton",
     "add_rms_norm",
     "apply_repetition_penalties",

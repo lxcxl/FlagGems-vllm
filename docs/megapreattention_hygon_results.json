@@ -1,0 +1,197 @@
+{
+  "status": "limited / needs_deep_opt",
+  "functional": "7 passed / 288.08s",
+  "active_cases": 16,
+  "rounds_per_case": 5,
+  "completed_case_rounds": 80,
+  "raw_rank_samples": 48000,
+  "correctness_passed": true,
+  "measurement_jit_free": true,
+  "selected_gpu_occupancy_clean": true,
+  "baseline": "Hygon RCCL allgather + rocBLAS matmul + torch.compile post; no comm/GEMM overlap",
+  "comparable_to_nv_native_baseline": false,
+  "mean_speedup": 0.7779150275382002,
+  "min_speedup": 0.6213788839135016,
+  "max_speedup": 1.0021983781714967,
+  "speed_threshold": 0.9,
+  "speed_pass_cases": 2,
+  "stable_all_five_rounds": 10,
+  "environment": {
+    "torch": "2.9.0",
+    "hip": "6.3.26045",
+    "triton": "3.6.0",
+    "source_sha256": {
+      "src/flaggems_vllm/runtime/backend/_hygon/ops/megapreattention.py": "ffab263894a23ae2e860ddb0c27a147ffbd8201a32376b124fba80b848f3a710",
+      "src/flaggems_vllm/ops/megapreattention.py": "228cc6e3f119d288315c2e0e52832f1abc2fc9aa1f22390a7f0eaefbcea31c3a",
+      "tests/megapreattention_utils.py": "f728ccd82a588b60126edb505bae20a4538a559e52d554a1e25e27ddae8f9fbc",
+      "tests/megapreattention_native.py": "dc217feb8c3d72a78a02a8344325f672e4b52d2c55bf0d9b94607e440ea79d0c",
+      "tools/megapreattention_data/dataset.py": "c3d79259d1928dea61ca635758cf05bef73712390f8ee1bff1da47686be15f59",
+      "tools/run_megapreattention.py": "2bbad68353190f40b526020336e4930624c9cbe5cfc0d664a56eec921d5ba764"
+    },
+    "manifest_sha256": "6ff563711ddaf31aab83d4f26049cb0f8dc02b537c075cbf3a4a645801ea6bd9",
+    "nv_reference": "89b0a5122a69d60f15afc552fb85b68dea8522d5",
+    "physical_devices": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "strategy": "fine-grained IPC, local cached stage, BM128/BN256/BK64/GROUP_M8, warps8/stages2",
+    "gpus": [
+      {
+        "logical": 0,
+        "name": "BW",
+        "arch": "gfx936:sramecc+:xnack-",
+        "multiprocessors": 80
+      },
+      {
+        "logical": 1,
+        "name": "BW",
+        "arch": "gfx936:sramecc+:xnack-",
+        "multiprocessors": 80
+      },
+      {
+        "logical": 2,
+        "name": "BW",
+        "arch": "gfx936:sramecc+:xnack-",
+        "multiprocessors": 80
+      },
+      {
+        "logical": 3,
+        "name": "BW",
+        "arch": "gfx936:sramecc+:xnack-",
+        "multiprocessors": 80
+      }
+    ]
+  },
+  "cases": {
+    "Qwen3.6-27B_tp2_t4096": {
+      "native": 1.4772957088947296,
+      "megapreattention": 1.891217444896698,
+      "speedup": 0.7811347726730716,
+      "stable_all_rounds": false,
+      "max_span": 0.05107420951268058,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-27B_tp2_t8192": {
+      "native": 2.8813002061843873,
+      "megapreattention": 3.5938458709716796,
+      "speedup": 0.8017317129422028,
+      "stable_all_rounds": true,
+      "max_span": 0.031140242152514788,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-27B_tp2_t16384": {
+      "native": 5.411623191833496,
+      "megapreattention": 6.986486882209777,
+      "speedup": 0.7745843201414324,
+      "stable_all_rounds": true,
+      "max_span": 0.01956769469706368,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-27B_tp2_t32768": {
+      "native": 10.56076115989685,
+      "megapreattention": 14.018884103775024,
+      "speedup": 0.7533239508737386,
+      "stable_all_rounds": true,
+      "max_span": 0.014953509387207724,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-35B-A3B_tp2_t4096": {
+      "native": 0.6128493103981019,
+      "megapreattention": 0.6115049911737442,
+      "speedup": 1.0021983781714967,
+      "stable_all_rounds": false,
+      "max_span": 0.1489840527876925,
+      "speed_threshold_pass": true
+    },
+    "Qwen3.6-35B-A3B_tp2_t8192": {
+      "native": 1.0843089518547058,
+      "megapreattention": 1.1366420316696166,
+      "speedup": 0.9539581694528412,
+      "stable_all_rounds": true,
+      "max_span": 0.04716753421580223,
+      "speed_threshold_pass": true
+    },
+    "Qwen3.6-35B-A3B_tp2_t16384": {
+      "native": 1.939584150314331,
+      "megapreattention": 2.197715531349182,
+      "speedup": 0.8825455900216604,
+      "stable_all_rounds": true,
+      "max_span": 0.04454640726813272,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-35B-A3B_tp2_t32768": {
+      "native": 3.6650278882980345,
+      "megapreattention": 4.335951623916626,
+      "speedup": 0.8452649397844176,
+      "stable_all_rounds": true,
+      "max_span": 0.027346279302852945,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-27B_tp4_t4096": {
+      "native": 0.9627077609300613,
+      "megapreattention": 1.439328727722168,
+      "speedup": 0.6688588523162525,
+      "stable_all_rounds": false,
+      "max_span": 0.052332180374872986,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-27B_tp4_t8192": {
+      "native": 1.8080546269416808,
+      "megapreattention": 2.7692223677635193,
+      "speedup": 0.6529105961259091,
+      "stable_all_rounds": true,
+      "max_span": 0.042514941504710774,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-27B_tp4_t16384": {
+      "native": 3.346736116886139,
+      "megapreattention": 5.354040372848511,
+      "speedup": 0.6250860815055033,
+      "stable_all_rounds": true,
+      "max_span": 0.025097751045262365,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-27B_tp4_t32768": {
+      "native": 6.5728396863937375,
+      "megapreattention": 10.577829174041748,
+      "speedup": 0.6213788839135016,
+      "stable_all_rounds": true,
+      "max_span": 0.012270595481456216,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-35B-A3B_tp4_t4096": {
+      "native": 0.4768196333050728,
+      "megapreattention": 0.5350541542768479,
+      "speedup": 0.8911614450494607,
+      "stable_all_rounds": false,
+      "max_span": 0.1281814129370798,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-35B-A3B_tp4_t8192": {
+      "native": 0.7739363313913346,
+      "megapreattention": 1.005554446697235,
+      "speedup": 0.7696612887878372,
+      "stable_all_rounds": false,
+      "max_span": 0.10731484394175089,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-35B-A3B_tp4_t16384": {
+      "native": 1.4145718092918396,
+      "megapreattention": 1.9548004868030548,
+      "speedup": 0.7236399923376717,
+      "stable_all_rounds": false,
+      "max_span": 0.052768325149411086,
+      "speed_threshold_pass": false
+    },
+    "Qwen3.6-35B-A3B_tp4_t32768": {
+      "native": 2.681244569778442,
+      "megapreattention": 3.8347238931655885,
+      "speedup": 0.6992014665142053,
+      "stable_all_rounds": true,
+      "max_span": 0.027798895339956445,
+      "speed_threshold_pass": false
+    }
+  }
+}
